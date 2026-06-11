@@ -1,0 +1,52 @@
+# Commonly ignored files, customise as needed.
+# https://www.atlassian.com/git/tutorials/saving-changes/gitignore
+
+# Node.js
+node_modules/
+dist/
+
+# Log files
+*.log
+
+# Packages
+*.jar
+*.tgz
+
+# Maven
+target/
+
+# JetBrains
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Apps
+*.app
+*.exe
+*.dmg
+
+# Large files
+*.mp4
+*.mkv
+*.mov
+
+# Reports
+/reports
+/output
+/allure-report
+/allure-results
+
+package-lock.json
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
