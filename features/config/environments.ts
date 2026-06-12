@@ -9,7 +9,7 @@ export const environments = {
         baseURL: ``
     },
     stage: {
-        baseURL: ``
+        baseURL: `https://practicesoftwaretesting.com`
     },
     prod: {
         baseURL: ``
