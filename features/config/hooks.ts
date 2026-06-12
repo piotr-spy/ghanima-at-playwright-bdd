@@ -1,4 +1,9 @@
 import { After, AfterAll, AfterStep, Before, BeforeAll, BeforeStep, setDefaultTimeout } from "@cucumber/cucumber"
+import { HomePage } from "../pageobjects/home.page"
+import { environments } from "./environments"
+import { browsers } from "./browsers"
+import { devices } from "./devices"
+import { World } from "./world"
 
 /**
  * Execution parameters
@@ -44,7 +49,30 @@ BeforeAll(async function () {})
  * 
  * @param scenario
  */
-Before(async function (scenario) {})
+Before<World>(async function (scenario) {
+    // Set scenario context variables
+    this.env = ENV as keyof typeof environments
+    this.browserName = BROWSER as keyof typeof browsers
+    this.headless = HEADLESS === 'true'
+    this.device = DEVICE as keyof typeof devices
+    this.isMobile = devices[this.device].isMobile
+    this.baseURL = environments[this.env].baseURL
+
+    // Filter out desktop only scenarios on mobile and vice versa
+    const scenarioTags = scenario.pickle.tags.map(tag => tag.name)
+    this.isMobile && scenarioTags.includes(`@desktopOnly`) ||
+    !this.isMobile && scenarioTags.includes(`@mobileOnly`) ? this.skip() : undefined
+
+    // Set up browser, context, and page
+    this.browser = await browsers[this.browserName].type.launch(browsers[this.browserName].launchOptions)
+    this.context = await this.browser.newContext({
+        viewport: devices[this.device].viewport
+    })
+    this.page = await this.context.newPage()
+
+    // Initialize page objects
+    this.homePage = new HomePage(this.page, this.baseURL)
+})
 
 /**
  * Runs before each step

@@ -3,6 +3,7 @@ import { environments } from "./environments"
 import { browsers } from "./browsers"
 import { devices } from "./devices"
 import { Browser, BrowserContext, Page } from "@playwright/test"
+import { HomePage } from "../pageobjects/home.page"
 
 export class World extends CucumberWorld {
     env!: keyof typeof environments
@@ -13,4 +14,7 @@ export class World extends CucumberWorld {
     context!: BrowserContext
     page!: Page
     baseURL!: string
+    isMobile!: boolean
+    skip!: () => void
+    homePage!: HomePage
 }
