@@ -1,0 +1,19 @@
+{
+  "name": "ghanima-at-playwright-bdd",
+  "version": "1.0.0",
+  "description": "This project is a starter framework for functional and E2E testing in BDD paradigm, using [Playwright](https://playwright.dev/), [Cucumber](https://cucumber.io/docs/), and [Allure](https://allurereport.org/docs/) reporting. It is designed to support scalable, maintainable, and readable automated tests using the Page Object Model (POM) pattern.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piotr-spy/ghanima-at-playwright-bdd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^13.0.0",
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.9.3",
+    "ts-node": "^10.9.2"
+  },
+  "scripts": {}
+}
