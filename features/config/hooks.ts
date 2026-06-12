@@ -93,7 +93,11 @@ AfterStep(async function (step) {})
  * 
  * @param scenario
  */
-After(async function (scenario) {})
+After<World>(async function (scenario) {
+    if (this.page) await this.page.close()
+    if (this.context) await this.context.close()
+    if (this.browser) await this.browser.close()
+})
 
 /**
  * Runs once after all scenarios
