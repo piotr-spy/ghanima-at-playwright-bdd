@@ -86,9 +86,9 @@ BeforeStep<World>(async function (step) {})
  * 
  * @param step
  */
-AfterStep<World>(async function ({result}) {
+AfterStep<World>(async function ({ result }) {
     // Capture screenshot on failure
-    if (result.status !== 'PASSED') {
+    if (result.status !== 'PASSED' && this.page) {
         const screenshot = await this.page.screenshot({ type: 'jpeg', quality: 75 })
         this.attach(screenshot, 'image/jpeg')
     }
