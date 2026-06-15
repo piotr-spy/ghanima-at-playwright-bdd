@@ -1,6 +1,25 @@
 #!/bin/bash
 # Remove temp folders
 rm -rf allure-report allure-results
+# Run API tests
+echo "
+        ===============================================
+        =                                             =
+        =              RUNNING API TESTS              =
+        =                                             =
+        ===============================================
+        "
+ENV=$ENV npx playwright test
+echo "
+        ===============================================
+        =                                             =
+        =        GENERATING API HTML REPORT           =
+        =                                             =
+        ===============================================
+        "
+allure generate "allure-results/api" --clean --single-file -o "allure-report/api"
+echo "API report: allure-report/api/index.html"
+
 # Run tests
 echo "
         ===============================================
@@ -11,7 +30,7 @@ echo "
         "
 # Device list: desktopHD, desktop1440p, iphone14ProMax, galaxyS20Ultra
 # Browser list: chrome, safari, firefox
-# Regression: @TESTPLAN_AM2S-5026
+# Regression: @Regression
 ENV="stage" DEVICE="desktopHD" BROWSERS=("chrome" "safari" "firefox") HEADLESS="false" TAGS="@Regression"
 
 # Run tests for each browser combination
