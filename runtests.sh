@@ -1,3 +1,6 @@
+#!/bin/bash
+# Remove temp folders
+rm -rf allure-report allure-results
 # Run tests
 echo "
         ===============================================
@@ -14,7 +17,17 @@ ENV="stage" DEVICE="desktopHD" BROWSERS=("chrome" "safari" "firefox") HEADLESS="
 # Run tests for each browser combination
 for BROWSER in "${BROWSERS[@]}"; do
   ENV=$ENV DEVICE=$DEVICE BROWSER=$BROWSER HEADLESS=$HEADLESS TAGS="$TAGS" \
-  npx cucumber-js
+  npx cucumber-js --format-options '{"resultsDir":"'"allure-results/${DEVICE}-${BROWSER}"'"}'
+
+  echo "
+        ===============================================
+        =                                             =
+        =           GENERATING HTML REPORT            =
+        =                                             =
+        ===============================================
+        "
+  allure generate "allure-results/${DEVICE}-${BROWSER}" --clean --single-file -o "allure-report/${DEVICE}-${BROWSER}"
+  echo "Report for $BROWSER-$DEVICE: allure-report/${DEVICE}-${BROWSER}/index.html"
 done
 
 echo "
