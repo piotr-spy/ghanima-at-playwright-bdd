@@ -6,6 +6,6 @@ export default defineConfig({
     ['allure-playwright', { resultsDir: 'allure-results/api' }]
   ],
   use: {
-    baseURL: '',
+    // baseURL: '',
   },
 })
