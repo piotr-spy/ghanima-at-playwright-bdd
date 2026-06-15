@@ -79,14 +79,20 @@ Before<World>(async function (scenario) {
  * 
  * @param step
  */
-BeforeStep(async function (step) {})
+BeforeStep<World>(async function (step) {})
 
 /**
  * Runs after each step
  * 
  * @param step
  */
-AfterStep(async function (step) {})
+AfterStep<World>(async function ({result}) {
+    // Capture screenshot on failure
+    if (result.status !== 'PASSED') {
+        const screenshot = await this.page.screenshot({ type: 'jpeg', quality: 75 })
+        this.attach(screenshot, 'image/jpeg')
+    }
+})
 
 /**
  * Runs after each scenario
