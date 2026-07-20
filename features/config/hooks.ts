@@ -1,4 +1,5 @@
 import { After, AfterAll, AfterStep, Before, BeforeAll, BeforeStep, setDefaultTimeout } from "@cucumber/cucumber"
+import { request as playwrightRequest } from "@playwright/test"
 import { HomePage } from "../pageobjects/home.page"
 import { environments } from "./environments"
 import { browsers } from "./browsers"
@@ -70,6 +71,11 @@ Before<World>(async function (scenario) {
     })
     this.page = await this.context.newPage()
 
+    // Set up API request context
+    this.request = await playwrightRequest.newContext({
+        baseURL: this.baseURL
+    })
+
     // Initialize page objects
     this.homePage = new HomePage(this.page, this.baseURL)
 })
@@ -100,6 +106,7 @@ AfterStep<World>(async function ({ result }) {
  * @param scenario
  */
 After<World>(async function (scenario) {
+    if (this.request) await this.request.dispose()
     if (this.page) await this.page.close()
     if (this.context) await this.context.close()
     if (this.browser) await this.browser.close()

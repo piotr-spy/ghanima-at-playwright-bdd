@@ -2,7 +2,7 @@ import { World as CucumberWorld } from "@cucumber/cucumber"
 import { environments } from "./environments"
 import { browsers } from "./browsers"
 import { devices } from "./devices"
-import { Browser, BrowserContext, Page } from "@playwright/test"
+import { APIRequestContext, APIResponse, Browser, BrowserContext, Page } from "@playwright/test"
 import { HomePage } from "../pageobjects/home.page"
 
 export class World extends CucumberWorld {
@@ -13,6 +13,8 @@ export class World extends CucumberWorld {
     browser!: Browser
     context!: BrowserContext
     page!: Page
+    request!: APIRequestContext
+    response!: APIResponse
     baseURL!: string
     isMobile!: boolean
     skip!: () => void
