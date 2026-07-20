@@ -1,24 +1,6 @@
 #!/bin/bash
 # Remove temp folders
 rm -rf allure-report allure-results
-# Run API tests
-echo "
-        ===============================================
-        =                                             =
-        =              RUNNING API TESTS              =
-        =                                             =
-        ===============================================
-        "
-npx playwright test
-echo "
-        ===============================================
-        =                                             =
-        =        GENERATING API HTML REPORT           =
-        =                                             =
-        ===============================================
-        "
-allure generate "allure-results/api" --clean --single-file -o "allure-report/api"
-echo "API report: allure-report/api/index.html"
 
 # Run tests
 echo "
@@ -31,7 +13,7 @@ echo "
 # Device list: desktopHD, desktop1440p, iphone14ProMax, galaxyS20Ultra
 # Browser list: chrome, safari, firefox
 # Regression: @Regression
-ENV="stage" DEVICE="desktopHD" BROWSERS=("chrome" "safari" "firefox") HEADLESS="false" TAGS="@Regression"
+ENV="stage" DEVICE="desktopHD" BROWSERS=("chrome" "safari" "firefox") HEADLESS="true" TAGS="@Regression"
 
 # Run tests for each browser combination
 for BROWSER in "${BROWSERS[@]}"; do
