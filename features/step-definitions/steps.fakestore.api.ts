@@ -1,6 +1,6 @@
 import { Then, When } from "@cucumber/cucumber"
 import { expect } from "@playwright/test"
-import { deletedProduct, newProduct, updatedProduct } from "../../api/test-data/products"
+import { deletedProduct, newProduct, updatedProduct } from "../test-data/api/products"
 import { World } from "../config/world"
 
 When<World>("I send a GET request to {string}", async function (url: string) {
